@@ -33,7 +33,6 @@ public class RetrofitInit {
                         .addConverterFactory(GsonConverterFactory.create(gson))
                         .build();
         }
-
         return retrofit;
     }
 }
