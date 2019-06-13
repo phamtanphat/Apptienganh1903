@@ -5,24 +5,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class TuvungAPus {
 
-@SerializedName("Id")
-@Expose
-private String id;
-@SerializedName("En")
-@Expose
-private String en;
-@SerializedName("Vn")
-@Expose
-private String vn;
-@SerializedName("isMemorized")
-@Expose
-private String isMemorized;
+    @SerializedName("Id")
+    @Expose
+    private String id;
+    @SerializedName("En")
+    @Expose
+    private String en;
+    @SerializedName("Vn")
+    @Expose
+    private String vn;
+    @SerializedName("isMemorized")
+    @Expose
+    private String isMemorized;
 
-public String getId() {
-return id;
-}
+    public String getId() {
+        return id;
+    }
 
-public void setId(String id) {
+    public void setId(String id) {
 this.id = id;
 }
 

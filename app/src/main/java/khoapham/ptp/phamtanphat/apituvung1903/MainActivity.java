@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         getWord();
+        toggleWord();
     }
 
     private void initView() {
@@ -47,6 +49,31 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<TuvungAPus>> call, Throwable t) {
+
+            }
+        });
+    }
+    private void toggleWord(){
+        APICallback apiCallback = Dataresponse.initRequestToServer();
+        Call<String> tuvungcallback = apiCallback.istoggleWord("1","false");
+        tuvungcallback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+
+                if (ketqua == null){
+                    Toast.makeText(MainActivity.this, "Khon co tu khoa", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (ketqua.equals("true")){
+                        Toast.makeText(MainActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(MainActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
 
             }
         });
