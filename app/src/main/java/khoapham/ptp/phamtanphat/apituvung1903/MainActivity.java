@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         getWord();
 
+
     }
 
     private void initView() {
@@ -53,5 +54,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

@@ -14,4 +14,7 @@ public interface APICallback {
 
     @GET("updatetuvung.php")
     Call<String> istoggleWord(@Query("id") String id , @Query("isMemorized") String isMemorized);
+
+    @GET("deletetuvung.php")
+    Call<String> remove(@Query("id") String id );
 }

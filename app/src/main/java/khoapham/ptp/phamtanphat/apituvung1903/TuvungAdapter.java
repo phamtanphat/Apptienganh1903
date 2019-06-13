@@ -55,6 +55,19 @@ public class TuvungAdapter extends ArrayAdapter<TuvungAPus> {
                 toggleWord(tuvung.getId(), String.valueOf(!memorized));
             }
         });
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tuvung.getId()!= null){
+                    remove_word(tuvung.getId());
+
+                }else {
+                    Toast.makeText(getContext(), "Gia tri hien tai khong co!!", Toast.LENGTH_SHORT).show();
+                }
+                updateLayout();
+
+            }
+        });
         return convertView;
     }
     private void toggleWord(String id , String isMemorized){
@@ -97,6 +110,32 @@ public class TuvungAdapter extends ArrayAdapter<TuvungAPus> {
 
             @Override
             public void onFailure(Call<List<TuvungAPus>> call, Throwable t) {
+
+            }
+        });
+    }
+    private void remove_word(String id){
+        APICallback apiCallback = Dataresponse.initRequestToServer();
+        Call<String> tuvungcallback = apiCallback.remove(id);
+        tuvungcallback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+
+                if (ketqua == null){
+                    Toast.makeText(getContext(), "Khon co tu khoa", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (ketqua.equals("true")){
+                        Toast.makeText(getContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(), "That bai", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
 
             }
         });
