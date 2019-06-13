@@ -11,10 +11,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+import khoapham.ptp.phamtanphat.apituvung1903.Api.connection.APICallback;
+import khoapham.ptp.phamtanphat.apituvung1903.Api.connection.Dataresponse;
 import khoapham.ptp.phamtanphat.apituvung1903.Api.modelapi.TuvungAPus;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TuvungAdapter extends ArrayAdapter<TuvungAPus> {
     public TuvungAdapter(@NonNull Context context, int resource,@NonNull List<TuvungAPus> objects) {
@@ -31,12 +37,45 @@ public class TuvungAdapter extends ArrayAdapter<TuvungAPus> {
         Button btnToggle = convertView.findViewById(R.id.buttonToggleWord);
         Button btnRemove = convertView.findViewById(R.id.buttonRemoveWord);
 
-        TuvungAPus tuvung = getItem(position);
+        final TuvungAPus tuvung = getItem(position);
 
         txtEn.setText(tuvung.getEn());
         txtVn.setText(tuvung.getIsMemorized().equals("true") ? "----" : tuvung.getVn());
         btnToggle.setText(tuvung.getIsMemorized().equals("true") ? "Forgot" : "isMemorized");
         btnToggle.setBackgroundColor(tuvung.getIsMemorized().equals("true") ? Color.rgb(33,136,56) : Color.rgb(200,35,51));
+
+        btnToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean memorized = Boolean.parseBoolean(tuvung.getIsMemorized());
+               toggleWord(tuvung.getId(), String.valueOf(!memorized));
+            }
+        });
         return convertView;
+    }
+    private void toggleWord(String id , String isMemorized){
+        APICallback apiCallback = Dataresponse.initRequestToServer();
+        Call<String> tuvungcallback = apiCallback.istoggleWord(id,isMemorized);
+        tuvungcallback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+
+                if (ketqua == null){
+                    Toast.makeText(getContext(), "Khon co tu khoa", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (ketqua.equals("true")){
+                        Toast.makeText(getContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(), "That bai", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }
