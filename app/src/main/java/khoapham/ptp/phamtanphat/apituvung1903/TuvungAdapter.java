@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import khoapham.ptp.phamtanphat.apituvung1903.Api.connection.APICallback;
@@ -23,8 +24,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TuvungAdapter extends ArrayAdapter<TuvungAPus> {
+    List<TuvungAPus> mangupdate;
+
     public TuvungAdapter(@NonNull Context context, int resource,@NonNull List<TuvungAPus> objects) {
         super(context, resource, objects);
+        mangupdate = objects;
     }
     @NonNull
     @Override
@@ -48,7 +52,7 @@ public class TuvungAdapter extends ArrayAdapter<TuvungAPus> {
             @Override
             public void onClick(View v) {
                 boolean memorized = Boolean.parseBoolean(tuvung.getIsMemorized());
-               toggleWord(tuvung.getId(), String.valueOf(!memorized));
+                toggleWord(tuvung.getId(), String.valueOf(!memorized));
             }
         });
         return convertView;
@@ -69,11 +73,30 @@ public class TuvungAdapter extends ArrayAdapter<TuvungAPus> {
                     }else{
                         Toast.makeText(getContext(), "That bai", Toast.LENGTH_SHORT).show();
                     }
+                    updateLayout();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+    private void updateLayout() {
+        APICallback apiCallback = Dataresponse.initRequestToServer();
+        Call<List<TuvungAPus>> tuvungcallback = apiCallback.getDataTuvung();
+        tuvungcallback.enqueue(new Callback<List<TuvungAPus>>() {
+            @Override
+            public void onResponse(Call<List<TuvungAPus>> call, Response<List<TuvungAPus>> response) {
+                List<TuvungAPus> mangtuvung =  response.body();
+                mangupdate.clear();
+                mangupdate.addAll(mangtuvung);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<TuvungAPus>> call, Throwable t) {
 
             }
         });
