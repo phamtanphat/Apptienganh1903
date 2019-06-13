@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:background="#52686363"
+
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        app:layout_constraintBottom_toTopOf="@id/buttonToggleWord"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="#218838"
+        android:textSize="25sp"
+        android:text="One"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintRight_toLeftOf="@id/textviewVn"
+        android:id="@+id/textviewEn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        app:layout_constraintBottom_toTopOf="@id/buttonRemoveWord"
+        app:layout_constraintLeft_toRightOf="@id/textviewEn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="#c82333"
+        android:textSize="25sp"
+        android:text="Mot"
+        android:id="@+id/textviewVn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:background="#218838"
+        android:text="Forgot"
+        app:layout_constraintRight_toLeftOf="@id/buttonRemoveWord"
+        android:id="@+id/buttonToggleWord"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textviewEn"
+        android:layout_width="wrap_content"
+        android:padding="5dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:background="#E0A800"
+        android:text="Remove"
+
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/buttonRemoveWord"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/buttonToggleWord"
+        app:layout_constraintTop_toBottomOf="@id/textviewVn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</android.support.constraint.ConstraintLayout>

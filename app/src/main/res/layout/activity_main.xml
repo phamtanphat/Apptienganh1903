@@ -1,18 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/relativeForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/relativeFormtrue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"
+                    android:paddingHorizontal="10dp"
+                    android:textSize="25sp"
+                    android:hint="English"
+                    android:id="@+id/edittextEn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/edittextEn"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"
+                    android:paddingHorizontal="10dp"
+                    android:textSize="25sp"
+                    android:hint="Vietnamese"
+                    android:id="@+id/edittextVn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="#218838"
+                    android:layout_marginLeft="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/buttonAddword"
+                    android:layout_below="@id/edittextVn"
+                    android:text="Add Word"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="#C93C3C"
+                    android:layout_marginRight="30dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/buttonCancel"
+                    android:layout_below="@id/edittextVn"
+                    android:text="Cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+            <RelativeLayout
+                android:layout_margin="10dp"
+                android:id="@+id/relativeFormfalse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/buttonForm"
+                    android:textSize="50sp"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:background="#218838"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <Spinner
+
+            android:layout_below="@id/relativeForm"
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+        </Spinner>
+        <ListView
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/spinner"
+            android:id="@+id/listviewWord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
